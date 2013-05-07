@@ -1,0 +1,25 @@
+<html ng-app="Main">
+<head>
+</head>
+<body>
+  <h1>Soccer Calendar</h1>
+  <div ng-controller="CalendarController">
+    <script type="text/ng-template" id="calendar.html">
+        <div>
+        Calendar for {{month}} {{year}}
+        </div>
+    </script>
+
+    <calendar month="{{calendar.month}}" year="{{calendar.year}}" ng-transclude>
+      <ol>
+        <li ng-repeat="event in events">
+          {{event.date}} {{event.start}}-{{event.end}} {{event.name}}
+        </li>
+      </ol>
+    </calendar>
+
+  </div>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
