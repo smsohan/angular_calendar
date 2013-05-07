@@ -1,17 +1,25 @@
 (function() {
-  var main;
+  var db, main;
 
   main = angular.module('Main', []);
 
-  main.factory('Events', function() {
-    return [
+  db = main.factory('DB', function() {
+    return window.localStorage;
+  });
+
+  main.factory('Events', function(DB) {
+    var allEvents;
+
+    allEvents = [
       {
         date: new Date(2013, 1, 1),
         start: '10:00 AM',
         end: '11:00 AM',
-        name: 'Coffee&Code'
+        name: 'Coffee & Code'
       }
     ];
+    DB.setItem('Events', JSON.stringify(allEvents));
+    return JSON.parse(DB.getItem('Events'));
   });
 
   main.controller('CalendarController', function($scope, Events) {
@@ -19,7 +27,10 @@
       month: 'January',
       year: 2013
     };
-    return $scope.events = Events;
+    $scope.events = Events;
+    return $scope.addNewEvent = function(month, year) {
+      return alert('Adding for ' + month + ' ' + year);
+    };
   });
 
   main.directive('calendar', function() {
@@ -28,7 +39,8 @@
       transclude: true,
       scope: {
         month: '@',
-        year: '@'
+        year: '@',
+        onClick: '&'
       },
       templateUrl: 'calendar.html'
     };

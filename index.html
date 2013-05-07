@@ -5,12 +5,16 @@
   <h1>Soccer Calendar</h1>
   <div ng-controller="CalendarController">
     <script type="text/ng-template" id="calendar.html">
-        <div>
+      <div>
         Calendar for {{month}} {{year}}
-        </div>
+      </div>
     </script>
 
     <calendar month="{{calendar.month}}" year="{{calendar.year}}" ng-transclude>
+      <div>
+        <a ng-click="addNewEvent(calendar.month, calendar.year)">Add New Event</a>
+      </div>
+
       <ol>
         <li ng-repeat="event in events">
           {{event.date}} {{event.start}}-{{event.end}} {{event.name}}
