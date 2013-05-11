@@ -11,14 +11,16 @@
       </div>
       <div class="days">
         <div class="day" ng-repeat="n in [] | range:31">
-          {{n}} <span ng-repeat="event in events | eventsForDay:n">{{event.name}}</span>
+          <a href="#" ng-click="addEvent(n)">{{n}}</a>
+          <span ng-repeat="event in events | eventsForDay:n">
+            {{event.name}}
+            <a href='#' ng-click="removeEvent(event)">x</a>
+          </span>
         </div>
       </div>
     </script>
-
     <calendar month="{{calendar.month}}" year="{{calendar.year}}" ng-transclude>
     </calendar>
-
   </div>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
   <script src="js/main.js"></script>

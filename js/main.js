@@ -37,7 +37,19 @@
       templateUrl: 'calendar.html',
       controller: function($scope, $filter, Events) {
         console.log(Events);
-        return $scope.events = Events;
+        $scope.events = Events;
+        $scope.addEvent = function(day) {
+          var eventName;
+
+          eventName = window.prompt('Event name', 'New event');
+          return $scope.events.push({
+            day: day,
+            name: eventName
+          });
+        };
+        return $scope.removeEvent = function(event) {
+          return $scope.events.splice($scope.events.indexOf(event), 1);
+        };
       }
     };
   });

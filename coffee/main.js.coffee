@@ -31,6 +31,12 @@ main.directive 'calendar', ->
   controller: ($scope, $filter, Events) ->
     console.log Events
     $scope.events = Events
+    $scope.addEvent = (day) ->
+      eventName = window.prompt('Event name', 'New event')
+      $scope.events.push({day: day, name: eventName})
+
+    $scope.removeEvent = (event) ->
+      $scope.events.splice($scope.events.indexOf(event), 1)
 
 main.filter 'range', ->
   (input, total) ->
@@ -40,3 +46,4 @@ main.filter 'range', ->
 main.filter 'eventsForDay', ->
   (events, day) ->
     event for event in events when event.day == day
+
