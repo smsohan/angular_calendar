@@ -1,21 +1,22 @@
 <html ng-app="Main">
 <head>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <h1>Soccer Calendar</h1>
   <div ng-controller="CalendarController">
     <script type="text/ng-template" id="calendar.html">
-        <div>
+      <div class="month">
         Calendar for {{month}} {{year}}
+      </div>
+      <div class="days">
+        <div class="day" ng-repeat="n in [] | range:31">
+          {{n}} <span ng-repeat="event in events | eventsForDay:n">{{event.name}}</span>
         </div>
+      </div>
     </script>
 
     <calendar month="{{calendar.month}}" year="{{calendar.year}}" ng-transclude>
-      <ol>
-        <li ng-repeat="event in events">
-          {{event.date}} {{event.start}}-{{event.end}} {{event.name}}
-        </li>
-      </ol>
     </calendar>
 
   </div>

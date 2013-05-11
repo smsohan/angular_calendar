@@ -2,7 +2,9 @@ main = angular.module('Main', [])
 
 main.factory 'Events', ->
   [
-    {date: new Date(2013, 1, 1), start: '10:00 AM', end: '11:00 AM', name: 'Coffee&Code'}
+    {day: 5, name: 'Coffee&Code'}
+    {day: 18, name: 'Study'}
+    {day: 25, name: 'Nachos'}
   ]
 
 main.controller 'CalendarController', ($scope, Events)->
@@ -25,3 +27,16 @@ main.directive 'calendar', ->
     year: '@'
 
   templateUrl: 'calendar.html'
+
+  controller: ($scope, $filter, Events) ->
+    console.log Events
+    $scope.events = Events
+
+main.filter 'range', ->
+  (input, total) ->
+    total = parseInt(total)
+    i for i in [1..total]
+
+main.filter 'eventsForDay', ->
+  (events, day) ->
+    event for event in events when event.day == day

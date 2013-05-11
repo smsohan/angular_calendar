@@ -6,10 +6,14 @@
   main.factory('Events', function() {
     return [
       {
-        date: new Date(2013, 1, 1),
-        start: '10:00 AM',
-        end: '11:00 AM',
+        day: 5,
         name: 'Coffee&Code'
+      }, {
+        day: 18,
+        name: 'Study'
+      }, {
+        day: 25,
+        name: 'Nachos'
       }
     ];
   });
@@ -30,7 +34,39 @@
         month: '@',
         year: '@'
       },
-      templateUrl: 'calendar.html'
+      templateUrl: 'calendar.html',
+      controller: function($scope, $filter, Events) {
+        console.log(Events);
+        return $scope.events = Events;
+      }
+    };
+  });
+
+  main.filter('range', function() {
+    return function(input, total) {
+      var i, _i, _results;
+
+      total = parseInt(total);
+      _results = [];
+      for (i = _i = 1; 1 <= total ? _i <= total : _i >= total; i = 1 <= total ? ++_i : --_i) {
+        _results.push(i);
+      }
+      return _results;
+    };
+  });
+
+  main.filter('eventsForDay', function() {
+    return function(events, day) {
+      var event, _i, _len, _results;
+
+      _results = [];
+      for (_i = 0, _len = events.length; _i < _len; _i++) {
+        event = events[_i];
+        if (event.day === day) {
+          _results.push(event);
+        }
+      }
+      return _results;
     };
   });
 
