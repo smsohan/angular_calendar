@@ -11,11 +11,13 @@
       </div>
       <div class="days">
         <div class="day" ng-repeat="n in [] | range:31">
-          <a href="#" ng-click="addEvent(n)">{{n}}</a>
-          <span ng-repeat="event in events | eventsForDay:n">
-            {{event.name}}
-            <a href='#' ng-click="removeEvent(event)">x</a>
-          </span>
+          <h1><a href="#" ng-click="addEvent(n)">{{n}}</a></h1>
+          <ul>
+            <li class="event"ng-repeat="event in events | eventsForDay:n">
+              {{event.name | truncate:8}}
+              <a href='#' ng-click="removeEvent(event)">x</a>
+            </li>
+          </ul>
         </div>
       </div>
     </script>

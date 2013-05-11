@@ -82,4 +82,10 @@
     };
   });
 
+  main.filter('truncate', function() {
+    return function(string, length) {
+      return string.substring(0, length);
+    };
+  });
+
 }).call(this);

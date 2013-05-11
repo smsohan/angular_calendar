@@ -1,3 +1,14 @@
+h1 {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
 div.days {
   width: 100%;
 }
@@ -9,6 +20,9 @@ div.month {
 div.day {
   width: 13%;
   float: left;
+  background-color: #3498db;
+  min-height: 100px;
+  margin: 2px;
 }
 
 div.day:nth-child(7n+1) {

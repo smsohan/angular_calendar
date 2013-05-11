@@ -47,3 +47,6 @@ main.filter 'eventsForDay', ->
   (events, day) ->
     event for event in events when event.day == day
 
+main.filter 'truncate', ->
+  (string, length) ->
+    string.substring(0, length)
