@@ -1,16 +1,11 @@
 main = angular.module('Main', [])
 
-db = main.factory 'DB', ->
-  window.localStorage
-
-main.factory 'Events', (DB)->
-  allEvents = [
-    {date: new Date(2013, 1, 1), start: '10:00 AM', end: '11:00 AM', name: 'Coffee & Code'}
+main.factory 'Events', ->
+  [
+    {day: 5, name: 'Coffee&Code'}
+    {day: 18, name: 'Study'}
+    {day: 25, name: 'Nachos'}
   ]
-
-  DB.setItem 'Events', JSON.stringify(allEvents)
-
-  JSON.parse DB.getItem('Events')
 
 main.controller 'CalendarController', ($scope, Events)->
 
@@ -36,3 +31,29 @@ main.directive 'calendar', ->
     onClick: '&'
 
   templateUrl: 'calendar.html'
+
+  controller: ($scope, $filter, Events) ->
+    $scope.events = Events
+    $scope.addEvent = (day) ->
+      eventName = window.prompt('Event name', 'New event')
+      $scope.events.push({day: day, name: eventName}) if !!eventName
+
+    $scope.removeEvent = (event) ->
+      $scope.events.splice($scope.events.indexOf(event), 1)
+
+  link: (scope, element, attrs)->
+    console.log element
+    #draggable = DragDrop.bind(element)
+
+main.filter 'range', ->
+  (input, total) ->
+    total = parseInt(total)
+    i for i in [1..total]
+
+main.filter 'eventsForDay', ->
+  (events, day) ->
+    event for event in events when event.day == day
+
+main.filter 'truncate', ->
+  (string, length) ->
+    string.substring(0, length)
