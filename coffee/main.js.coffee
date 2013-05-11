@@ -32,7 +32,7 @@ main.directive 'calendar', ->
     $scope.events = Events
     $scope.addEvent = (day) ->
       eventName = window.prompt('Event name', 'New event')
-      $scope.events.push({day: day, name: eventName})
+      $scope.events.push({day: day, name: eventName}) if !!eventName
 
     $scope.removeEvent = (event) ->
       $scope.events.splice($scope.events.indexOf(event), 1)

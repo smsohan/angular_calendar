@@ -41,10 +41,12 @@
           var eventName;
 
           eventName = window.prompt('Event name', 'New event');
-          return $scope.events.push({
-            day: day,
-            name: eventName
-          });
+          if (!!eventName) {
+            return $scope.events.push({
+              day: day,
+              name: eventName
+            });
+          }
         };
         return $scope.removeEvent = function(event) {
           return $scope.events.splice($scope.events.indexOf(event), 1);
