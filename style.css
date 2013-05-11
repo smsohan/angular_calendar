@@ -32,3 +32,11 @@ div.day:nth-child(7n+1) {
 div.day:last-child {
   clear: right;
 }
+
+.event {
+  position: relative;
+}
+
+.selectable {
+  cursor: hand; cursor: pointer;
+}

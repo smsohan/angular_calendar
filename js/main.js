@@ -36,7 +36,6 @@
       },
       templateUrl: 'calendar.html',
       controller: function($scope, $filter, Events) {
-        console.log(Events);
         $scope.events = Events;
         $scope.addEvent = function(day) {
           var eventName;
@@ -50,6 +49,9 @@
         return $scope.removeEvent = function(event) {
           return $scope.events.splice($scope.events.indexOf(event), 1);
         };
+      },
+      link: function(scope, element, attrs) {
+        return console.log(element);
       }
     };
   });

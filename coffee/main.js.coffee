@@ -29,7 +29,6 @@ main.directive 'calendar', ->
   templateUrl: 'calendar.html'
 
   controller: ($scope, $filter, Events) ->
-    console.log Events
     $scope.events = Events
     $scope.addEvent = (day) ->
       eventName = window.prompt('Event name', 'New event')
@@ -37,6 +36,10 @@ main.directive 'calendar', ->
 
     $scope.removeEvent = (event) ->
       $scope.events.splice($scope.events.indexOf(event), 1)
+
+  link: (scope, element, attrs)->
+    console.log element
+    #draggable = DragDrop.bind(element)
 
 main.filter 'range', ->
   (input, total) ->
