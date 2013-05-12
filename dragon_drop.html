@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dragon Drop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootswatch/2.3.1/spruce/bootstrap.min.css">
+  <style>
+    [btf-dragon] {
+      cursor: hand;
+      cursor: pointer;
+      padding: 20px;
+      border: 1px solid #c0392b;
+    }
+  </style>
+</head>
+<body ng-app="App">
+  <div class="container" ng-controller="AppController">
+    <div class="row">
+      <ul class="span3" ng-repeat="n in [0,1,2,3,4]">
+        <li btf-dragon="item in lists[n]">{{item}}</li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+  <script src="angular_dragon_drop.js"></script>
+  <script>
+    angular.module('App', ['btford.dragon-drop']).
+    controller('AppController', function ($scope) {
+      $scope.lists = [];
+      for (var i=0; i<5; i++) {
+        $scope.lists[i] = ['Item ' + i];
+      }
+    });
+  </script>
+</body>
+</html>

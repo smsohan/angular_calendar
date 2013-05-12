@@ -40,10 +40,6 @@ main.directive 'calendar', ->
     $scope.removeEvent = (event) ->
       $scope.events.splice($scope.events.indexOf(event), 1)
 
-  link: (scope, element, attrs) ->
-    console.log element
-    #draggable = DragDrop.bind(element)
-
 main.filter 'range', ->
   (input, total) ->
     total = parseInt(total)
