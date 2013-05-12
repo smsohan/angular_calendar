@@ -1,5 +1,5 @@
 body {
-  margin: 0px;
+  margin: 0;
   color: #34495e;
   font-size: 1em;
   font-weight: 600;
@@ -38,30 +38,37 @@ ul {
   list-style-type: none;
 }
 
-div.days {
-  width: 100%;
+.cleafix {
+  clear: both;
 }
 
-div.month {
+.month {
   margin-bottom: 2em;
 }
 
-div.day {
-  width: 13%;
+.days {
+  width: 100%;
+}
+
+.day {
+  width: 14%;
   float: left;
   color: #fff;
   background-color: #1abc9c;
   border-radius: 5px;
   min-height: 100px;
   margin: 2px;
+}
+
+.day-container {
   padding: 5px;
 }
 
-div.day:nth-child(7n+1) {
+.day:nth-child(7n+1) {
   clear: left;
 }
 
-div.day:last-child {
+.day:last-child {
   clear: right;
 }
 
@@ -74,18 +81,17 @@ div.day:last-child {
   float: right;
 }
 
-.events {
+.day-events {
   margin-top: 24px;
 }
 
-.event {
+.day-event {
   position: relative;
 }
 
-.selectable {
-  cursor: hand; cursor: pointer;
-}
-
-.cleafix {
-  clear: both;
+[btf-dragon] {
+  cursor: hand;
+  cursor: pointer;
+  padding: 20px;
+  border: 1px solid #c0392b;
 }

@@ -1,7 +1,7 @@
 (function() {
   var main;
 
-  main = angular.module('Main', []);
+  main = angular.module('App', ['btford.dragon-drop']);
 
   main.factory('Events', function() {
     return [
