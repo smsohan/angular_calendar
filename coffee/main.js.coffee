@@ -1,13 +1,13 @@
-main = angular.module('Main', [])
+main = angular.module('App', ['btford.dragon-drop'])
 
 main.factory 'Events', ->
   [
-    {day: 5, name: 'Coffee&Code'}
-    {day: 18, name: 'Study'}
-    {day: 25, name: 'Nachos'}
+    { day: 5, name: 'Coffee&Code' }
+    { day: 18, name: 'Study' }
+    { day: 25, name: 'Nachos' }
   ]
 
-main.controller 'CalendarController', ($scope, Events)->
+main.controller 'CalendarController', ($scope, Events) ->
 
   $scope.calendar =
     month: 'January'
@@ -15,9 +15,8 @@ main.controller 'CalendarController', ($scope, Events)->
 
   $scope.events = Events
 
-  $scope.addNewEvent = (month, year)->
+  $scope.addNewEvent = (month, year) ->
     alert('Adding for ' + month + ' ' + year)
-
 
 main.directive 'calendar', ->
 
@@ -40,10 +39,6 @@ main.directive 'calendar', ->
 
     $scope.removeEvent = (event) ->
       $scope.events.splice($scope.events.indexOf(event), 1)
-
-  link: (scope, element, attrs)->
-    console.log element
-    #draggable = DragDrop.bind(element)
 
 main.filter 'range', ->
   (input, total) ->

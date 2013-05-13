@@ -5,5 +5,4 @@ Modal overlay
 https://github.com/hakimel/Avgrund
 
 Figure out D&D
-https://github.com/kbjr/DragDrop
-https://developer.mozilla.org/en/docs/DOM/document.elementFromPoint
+https://github.com/btford/angular-dragon-drop
