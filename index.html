@@ -10,18 +10,21 @@
         Calendar for {{month}} {{year}}
       </div>
       <div class="days">
-        <div class="day" ng-repeat="n in [] | range:31">
-          <div class="day-container">
-            <div class="day-display">{{n}}</div>
-            <div class="day-add">[<a href="#" ng-click="addEvent(n)">+</a>]</div>
+        <div ng-repeat="day in days">
+          <div class="day" droppable>
+            &nbsp;
+            <div class="day-display">{{day.day}}</div>
+            <div class="day-add">[<a href="#" ng-click="addEvent(day.day)">+</a>]</div>
             <div class="clearfix"></div>
-            <ul class="day-events">
-              <li class="day-event" btf-dragon="event in events | eventsForDay:n">
-                {{event.name | truncate:12}}
-                <a href='#' ng-click="removeEvent(event)">x</a>
+            <ul class="events">
+              <li class="event selectable" ng-repeat="event in events | eventsForDay:day.day">
+                <div drag="event">
+                  {{event.name | truncate:12}}
+                  <a href='#' ng-click="removeEvent(event)">x</a>
+                </div>
               </li>
             </ul>
-          </div>
+          <div>
         </div>
       </div>
     </script>
@@ -29,7 +32,7 @@
     </calendar>
   </div>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
-  <script src="angular_dragon_drop.js"></script>
+  <script src="js/underscore.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
