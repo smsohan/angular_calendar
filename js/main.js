@@ -6,12 +6,15 @@
   main.factory('Events', function() {
     return [
       {
+        id: 1,
         day: 5,
         name: 'Coffee&Code'
       }, {
+        id: 2,
         day: 18,
         name: 'Study'
       }, {
+        id: 3,
         day: 25,
         name: 'Nachos'
       }
@@ -23,10 +26,7 @@
       month: 'January',
       year: 2013
     };
-    $scope.events = Events;
-    return $scope.addNewEvent = function(month, year) {
-      return alert('Adding for ' + month + ' ' + year);
-    };
+    return $scope.events = Events;
   });
 
   main.directive('calendar', function() {
@@ -40,24 +40,73 @@
       },
       templateUrl: 'calendar.html',
       controller: function($scope, $filter, Events) {
+        var day, _i;
+
         $scope.events = Events;
+        $scope.days = [];
+        for (day = _i = 1; _i <= 31; day = ++_i) {
+          $scope.days.push({
+            day: day
+          });
+        }
         $scope.addEvent = function(day) {
-          var eventName;
+          var eventName, newId;
 
           eventName = window.prompt('Event name', 'New event');
+          newId = _.max($scope.events, function(event) {
+            return event.id;
+          }) + 1;
           if (!!eventName) {
             return $scope.events.push({
+              id: newId,
               day: day,
               name: eventName
             });
           }
         };
-        return $scope.removeEvent = function(event) {
+        $scope.removeEvent = function(event) {
           return $scope.events.splice($scope.events.indexOf(event), 1);
         };
+        return $scope.moveEvent = function(draggedEvent, toDay) {
+          return angular.forEach($scope.events, function(event) {
+            if (event.id === draggedEvent.id) {
+              return $scope.$apply(function() {
+                return event.day = toDay;
+              });
+            }
+          });
+        };
+      }
+    };
+  });
+
+  main.directive('drag', function() {
+    return {
+      scope: {
+        event: '=drag'
       },
       link: function(scope, element, attrs) {
-        return console.log(element);
+        attrs.$set('draggable', true);
+        return element.bind('dragstart', function(ev) {
+          ev.event = scope.event;
+          return ev.dataTransfer.setData("Event", JSON.stringify(scope.event));
+        });
+      }
+    };
+  });
+
+  main.directive('droppable', function() {
+    return {
+      controller: function($scope, $element, $attrs) {
+        $element.bind('drop', function(ev) {
+          var draggedEvent;
+
+          draggedEvent = JSON.parse(ev.dataTransfer.getData('Event'));
+          return $scope.$parent.moveEvent(draggedEvent, $scope.day.day);
+        });
+        return $element.bind('dragover', function(ev) {
+          return ev.preventDefault();
+        });
       }
     };
   });
