@@ -1,11 +1,26 @@
 main = angular.module('App', [])
 
 main.factory 'Events', ->
-  [
+
+  _allEvents =  [
     {id: 1, day: 5, name: 'Coffee&Code'}
     {id: 2, day: 18, name: 'Study'}
     {id: 3, day: 25, name: 'Nachos'}
   ]
+
+  allEvents: _allEvents
+
+  addEvent: (day, eventName) ->
+    newId = _.max(_allEvents, (event)-> event.id).id + 1
+    _allEvents.push({id: newId, day: day, name: eventName}) if !!eventName
+
+  removeEvent: (event) ->
+    _allEvents.splice(_allEvents.indexOf(event), 1)
+
+  moveEvent: (eventToMove, toDay)->
+    angular.forEach _allEvents, (event)->
+      if event.id == eventToMove.id
+        event.day = toDay
 
 main.controller 'CalendarController', ($scope, Events) ->
 
@@ -38,16 +53,11 @@ main.directive 'calendar', ->
 
     $scope.addEvent = (day) ->
       eventName = window.prompt('Event name', 'New event')
-      newId = _.max($scope.events, (event)-> event.id) + 1
-      $scope.events.push({id: newId, day: day, name: eventName}) if !!eventName
+      $scope.events.addEvent(day, eventName)
 
-    $scope.removeEvent = (event) ->
-      $scope.events.splice($scope.events.indexOf(event), 1)
-
-    $scope.moveEvent = (draggedEvent, toDay)->
-      angular.forEach $scope.events, (event)->
-        if event.id == draggedEvent.id
-          $scope.$apply -> event.day = toDay
+    $scope.removeEvent = $scope.events.removeEvent
+    $scope.moveEvent = (eventToMove, toDay)->
+      $scope.$apply -> $scope.events.moveEvent(eventToMove, toDay)
 
 
 main.directive 'drag', ->
@@ -64,8 +74,8 @@ main.directive 'droppable', ->
 
   controller: ($scope, $element, $attrs)->
     $element.bind 'drop', (ev)->
-      draggedEvent = JSON.parse(ev.dataTransfer.getData('Event'))
-      $scope.$parent.moveEvent draggedEvent, $scope.day.day
+      eventToMove = JSON.parse(ev.dataTransfer.getData('Event'))
+      $scope.$parent.moveEvent eventToMove, $scope.day.day
 
     $element.bind 'dragover', (ev)->
       ev.preventDefault()
