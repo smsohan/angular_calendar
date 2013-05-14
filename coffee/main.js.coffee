@@ -51,8 +51,6 @@ main.directive 'calendar', ->
 
 
 main.directive 'drag', ->
-  scope:
-    event: '=drag'
 
   link: (scope, element, attrs)->
     attrs.$set('draggable', true)

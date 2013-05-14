@@ -18,7 +18,7 @@
             <div class="clearfix"></div>
             <ul class="events">
               <li class="event selectable" ng-repeat="event in events | eventsForDay:day.day">
-                <div drag="event">
+                <div drag>
                   {{event.name | truncate:12}}
                   <a href='#' ng-click="removeEvent(event)">x</a>
                 </div>
