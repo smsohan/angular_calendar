@@ -1,4 +1,4 @@
-main = angular.module('App', ['btford.dragon-drop'])
+main = angular.module('App', [])
 
 main.factory 'Events', ->
   [
