@@ -17,7 +17,7 @@
             <div class="day-add">[<a href="#" ng-click="addEvent(day.day)">+</a>]</div>
             <div class="clearfix"></div>
             <ul class="events">
-              <li class="event selectable" ng-repeat="event in events | eventsForDay:day.day">
+              <li class="event selectable" ng-repeat="event in events.allEvents | eventsForDay:day.day">
                 <div drag>
                   {{event.name | truncate:12}}
                   <a href='#' ng-click="removeEvent(event)">x</a>
