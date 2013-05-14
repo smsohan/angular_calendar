@@ -38,7 +38,7 @@ main.directive 'calendar', ->
 
     $scope.addEvent = (day) ->
       eventName = window.prompt('Event name', 'New event')
-      newId = _.max($scope.events, (event)-> event.id) + 1
+      newId = _.max($scope.events, (event)-> event.id).id + 1
       $scope.events.push({id: newId, day: day, name: eventName}) if !!eventName
 
     $scope.removeEvent = (event) ->

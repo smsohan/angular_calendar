@@ -55,7 +55,7 @@
           eventName = window.prompt('Event name', 'New event');
           newId = _.max($scope.events, function(event) {
             return event.id;
-          }) + 1;
+          }).id + 1;
           if (!!eventName) {
             return $scope.events.push({
               id: newId,
