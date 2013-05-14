@@ -82,9 +82,6 @@
 
   main.directive('drag', function() {
     return {
-      scope: {
-        event: '=drag'
-      },
       link: function(scope, element, attrs) {
         attrs.$set('draggable', true);
         return element.bind('dragstart', function(ev) {
