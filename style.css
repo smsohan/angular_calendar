@@ -1,0 +1,97 @@
+body {
+  margin: 0;
+  color: #34495e;
+  font-size: 1em;
+  font-weight: 600;
+  font-family: helvetica, arial, sans-serif;
+  background-color: #ecf0f1;
+}
+
+a:link {
+  color: #446DB2;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #446DB2;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #446DB2;
+  text-decoration: none;
+}
+
+a:active {
+  color: #446DB2;
+  text-decoration: none;
+}
+
+h1, h2, h3 {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.cleafix {
+  clear: both;
+}
+
+.month {
+  margin-bottom: 2em;
+}
+
+.days {
+  width: 100%;
+}
+
+.day {
+  width: 14%;
+  float: left;
+  color: #fff;
+  background-color: #1abc9c;
+  border-radius: 5px;
+  min-height: 100px;
+  margin: 2px;
+}
+
+.day-container {
+  padding: 5px;
+}
+
+.day:nth-child(7n+1) {
+  clear: left;
+}
+
+.day:last-child {
+  clear: right;
+}
+
+.day-display {
+  float: left;
+  font-size: 1.3em;
+}
+
+.day-add {
+  float: right;
+}
+
+.day-events {
+  margin-top: 24px;
+}
+
+.day-event {
+  position: relative;
+}
+
+[btf-dragon] {
+  cursor: hand;
+  cursor: pointer;
+  padding: 20px;
+  border: 1px solid #c0392b;
+}

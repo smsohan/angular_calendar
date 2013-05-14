@@ -1,0 +1,38 @@
+<html ng-app="App">
+<head>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>AngularJS Demo</h1>
+  <div ng-controller="CalendarController">
+    <script type="text/ng-template" id="calendar.html">
+      <div class="month">
+        Calendar for {{month}} {{year}}
+      </div>
+      <div class="days">
+        <div ng-repeat="day in days">
+          <div class="day" droppable>
+            &nbsp;
+            <div class="day-display">{{day.day}}</div>
+            <div class="day-add">[<a href="#" ng-click="addEvent(day.day)">+</a>]</div>
+            <div class="clearfix"></div>
+            <ul class="events">
+              <li class="event selectable" ng-repeat="event in events | eventsForDay:day.day">
+                <div drag="event">
+                  {{event.name | truncate:12}}
+                  <a href='#' ng-click="removeEvent(event)">x</a>
+                </div>
+              </li>
+            </ul>
+          <div>
+        </div>
+      </div>
+    </script>
+    <calendar month="{{calendar.month}}" year="{{calendar.year}}" ng-transclude>
+    </calendar>
+  </div>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+  <script src="js/underscore.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
